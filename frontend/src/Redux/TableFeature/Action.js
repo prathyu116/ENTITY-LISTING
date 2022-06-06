@@ -9,7 +9,7 @@ export const addData = (data) => {
   };
 };
 export const getData = (page) => async (dispatch) => {
-  const data = await fetch(`http://localhost:8080/data?_page=${page}&_limit=5`).then((d) => d.json());
+  const data = await fetch(`http://localhost:5000/population?page=${page}&pagesize=3`).then((d) => d.json());
   dispatch(addData(data));
 };
 export const deleteData = (id) => {
