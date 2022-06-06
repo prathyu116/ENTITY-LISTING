@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteData, getData } from "../Redux/TableFeature/Action";
 
-const Table = ({currentId ,setCurrentId,page}) => {
+const Table = ({ currentId, setCurrentId, sortLH, sortHL }) => {
   const dispatch = useDispatch();
 
   const state = useSelector((store) => store.TableData.datas);
@@ -11,11 +11,15 @@ const Table = ({currentId ,setCurrentId,page}) => {
     dispatch(getData());
   }, []);
 
-
-  console.log("sssss", state);
   return (
     <div>
       <div className="container">
+        <button onClick={sortLH} className="btn btn-outline-secondary">
+          id Low-High
+        </button>
+        <button onClick={sortHL} className="btn btn-outline-secondary">
+          id High-Low
+        </button>
         <div className="row">
           <div className="col">
             <table className="table table-striped">
@@ -67,7 +71,6 @@ const Table = ({currentId ,setCurrentId,page}) => {
           </div>
         </div>
       </div>
-      
     </div>
   );
 };

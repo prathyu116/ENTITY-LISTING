@@ -9,7 +9,7 @@ export const addData = (data) => {
   };
 };
 export const getData = (page) => async (dispatch) => {
-  const data = await fetch(`http://localhost:5000/population?page=${page}&pagesize=3`).then((d) => d.json());
+  const data = await fetch(`http://localhost:5000/population?page=${page}&pagesize=5`).then((d) => d.json());
   dispatch(addData(data.datas));
 };
 export const deleteData = (id) => {
@@ -19,7 +19,6 @@ export const deleteData = (id) => {
   };
 };
 export const editData = (id,data) => {
-  console.log("D",id,data);
   return {
     type: EDIT_DATA,
     id,
