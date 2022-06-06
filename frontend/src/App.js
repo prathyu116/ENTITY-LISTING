@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Link, useSearchParams } from "react-router-dom";
+
 import { useDispatch } from 'react-redux';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -7,12 +9,17 @@ import { getData } from './Redux/TableFeature/Action';
 
 function App() {
   const [currentId, setCurrentId] = useState(0);
-    const [page, setPage] = useState(1);
+    let [searchParams, setSearchParams] = useSearchParams();
+
+  const [page, setPage] = useState(Number(searchParams.get("page") || 1));
       const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getData(page));
   }, [page]);
+    useEffect(() => {
+      setSearchParams({ page });
+    }, [page, setSearchParams]);
 
   return (
     <div className="App">
@@ -24,11 +31,10 @@ function App() {
         <button disabled={page === 1 ? true : false} onClick={() => setPage(page - 1)} className="btn btn-outline-success mx-2 px-3">
           Prev
         </button>
-        <button onClick={() => setPage(page + 1)} className="btn btn-outline-success mx-2 px-3">
+        <button onClick={() => setPage(page + 1)} className="btn btn-outline-success mx-2 px-3" >
           Next
         </button>
       </div>
-      
     </div>
   );
 }
